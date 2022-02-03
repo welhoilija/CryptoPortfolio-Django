@@ -1,0 +1,192 @@
+{% extends "base.html" %}
+
+
+{% block title %}{{ section.title }}{% endblock %}
+
+
+
+{% block content %}
+
+
+<div class="p-5">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+    </div>
+
+
+    {% for crypto in assets %}
+        <!-- Content Row -->
+        <div class="row">
+
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                    {{ crypto.ticker }}</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800" id={{crypto.ticker}}price>{{ crypto.price_set.all.last.price }} $</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+            $(document).ready(function () {
+                setInterval(function () {
+                    $.ajax({
+                        url: '{% url 'getdata' %}',
+                        type: "get",
+                        cache: true,
+                        dataType: 'html',
+                        success: function (data) {
+                            console.log("success" + data);
+                            const obj = JSON.parse(data);
+                            document.getElementById('{{crypto.ticker}}price').innerHTML = obj.{{ crypto.ticker }} + "$";
+                        },
+                        error: function (data) {
+                            alert("Got an error dude " + data);
+                        }
+                    });
+                }, 60000);
+            });
+        </script>
+
+            <div class="col-xl-8 col-lg-7">
+                <div class="card shadow mb-4">
+                    <!-- Card Body -->
+                    <div class="card-body">
+                        <div class="chart-area">
+                            <canvas id="{{ crypto.ticker }}" style="display: block; height: 150px; width: 963px;" class="chartjs-render-monitor" width="1926" height="300"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+      <p></p>
+
+      <p></p>
+    {% endfor %}
+        <script type="text/javascript">
+            $(function () {
+                {% for crypto in assets %}
+
+                var ctx = document.getElementById("{{ crypto.ticker }}").getContext('2d');
+                var data = {
+                    datasets: [{
+                        label: '{{ crypto.ticker }} market',
+                        borderColor: "#FF0000",
+                        data: [
+                        {% for price in crypto.price_set.all %}
+                            {x:'{{ price.created_at }}', y:'{{ price.price }}'},
+                        {% endfor %}]
+                    }]
+                };
+                var {{ crypto.ticker }} = new Chart(ctx, {
+                    type: 'line',
+                    data: data,
+                    options: {
+                        scales: {
+                            xAxis: {
+                                ticks: {
+                                    display: false //this will remove only the label
+                                }
+                            }
+                        },
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                boxWidth: 12
+                            }
+                        }
+                    }
+                });
+                {% endfor %}
+            });
+
+    </script>
+
+    
+    <div class="row">
+
+        <!-- Area Chart -->
+        <div class="col-xl-8 col-lg-7">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
+                    <div class="dropdown no-arrow">
+                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                            <div class="dropdown-header">Dropdown Header:</div>
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="chart-area"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                        <canvas id="myAreaChart" style="display: block; height: 320px; width: 963px;" class="chartjs-render-monitor" width="1926" height="640"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pie Chart -->
+        <div class="col-xl-4 col-lg-5">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
+                    <div class="dropdown no-arrow">
+                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                            <div class="dropdown-header">Dropdown Header:</div>
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="chart-pie pt-4 pb-2"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                        <canvas id="myPieChart" style="display: block; height: 245px; width: 449px;" class="chartjs-render-monitor" width="898" height="490"></canvas>
+                    </div>
+                    <div class="mt-4 text-center small">
+                        <span class="mr-2">
+                            <i class="fas fa-circle text-primary"></i> Direct
+                        </span>
+                        <span class="mr-2">
+                            <i class="fas fa-circle text-success"></i> Social
+                        </span>
+                        <span class="mr-2">
+                            <i class="fas fa-circle text-info"></i> Referral
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+                
+</div>
+
+
+{% endblock %}
