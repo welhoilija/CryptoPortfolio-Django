@@ -8,6 +8,7 @@ Currently its possible to add and track any crypto listed in any ccxt-compatible
 
 For periodic tasks (such as fetching market data) im using celery
 
+Live updates on page with ajax :)
 
 TODO:
 -Per-asset views with more information regarding the asset, (such as volatility index, bid amount etc.)
