@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+
+{% block title %}{{ section.title }}{% endblock %}
+
+
+
+{% block content %}
+
+<div class="card shadow m-4 p-5">
+    <div class="p-5">
+        <div class="text-center">
+            <h1 class="h4 text-gray-900 mb-4">Add an asset</h1>
+        </div>
+        <div class="form-group">
+            <form action="" method="post" class="user">
+
+                {% csrf_token %}
+                {{ form }}
+                <br>
+
+                {% if messages and outgoingtransaction == None %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+                                <p class="text-{% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</p>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                <input type="submit" value="Submit" class="btn btn-primary btn-user btn-block w-100">
+
+            </form>
+        </div>
+        <hr>
+    </div>
+</div>
+{% endblock %}

@@ -5,6 +5,7 @@ urlpatterns = [
 	path('', views.home, name='home'),
 	path('getdata', views.getdata, name='getdata'),
 	path("chart", views.charttest, name="charttest"),
-	path("<str:asset_id>", views.assetview, name="assetview"),
+	path("asset/<str:asset_id>", views.assetview, name="assetview"),
+	path("addasset", views.addasset, name="addassetview"),
 
 ]
