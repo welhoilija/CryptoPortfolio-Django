@@ -8,45 +8,47 @@ from django.contrib import messages
 
 
 def home(request):
-	assets = Asset.objects.all()
+    assets = Asset.objects.all()
+    holdings = Holding.objects.all()
 
 
-	context = {
-	"assets": assets,
-	}
+    context = {
+    "assets": assets,
+    "holdings": holdings,
+    }
 
-	return render(request, "home.html", context)
+    return render(request, "home.html", context)
 
 def charttest(request):
-	return render(request, "charttest.html")
+    return render(request, "charttest.html")
 
 
 def getdata(request):
-	assets = Asset.objects.all()
+    assets = Asset.objects.all()
 
-	if request.accepts('XMLHttpRequest') and request.method =="GET":
-		json = {}
-		for asset in assets:
-			json[asset.ticker] = asset.price_set.all().last().price
-
-
-		data = json
+    if request.accepts('XMLHttpRequest') and request.method =="GET":
+        json = {}
+        for asset in assets:
+            json[asset.ticker] = asset.price_set.all().last().price
 
 
-		return  JsonResponse(data)
+        data = json
+
+
+        return  JsonResponse(data)
 
 
 def assetview(request, asset_id):
 
-	asset = Asset.objects.get(id=asset_id)
+    asset = Asset.objects.get(id=asset_id)
 
 
-	context = {
-	"asset": asset,
-	}
+    context = {
+    "asset": asset,
+    }
 
 
-	return render(request, "asset.html", context)
+    return render(request, "asset.html", context)
 
 
 
@@ -62,12 +64,12 @@ def addasset(request):
         
         # check whether the form is valid:
         if form.is_valid():
-        	if Asset.objects.filter(ticker=form.cleaned_data['Asset_ticker']).exists():
-        		messages.warning(request, 'Asset already added')
-        	else:
-        		#Add asset to db
-        		Asset.objects.create(ticker=form.cleaned_data["Asset_ticker"], desc=form.cleaned_data['Asset_Description'])
-        		messages.success(request, "Asset added")
+            if Asset.objects.filter(ticker=form.cleaned_data['Asset_ticker']).exists():
+                messages.warning(request, 'Asset already added')
+            else:
+                #Add asset to db
+                Asset.objects.create(ticker=form.cleaned_data["Asset_ticker"], desc=form.cleaned_data['Asset_Description'])
+                messages.success(request, "Asset added")
 
 
 
@@ -80,3 +82,37 @@ def addasset(request):
 
 
     return render(request, 'addasset.html', {'form': form,})
+
+
+def addHolding(request):
+
+
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+
+        # create a form instance and populate it with data from the request:
+        form = AddHoldingForm(request.POST)
+
+        
+        # check whether the form is valid:
+        if form.is_valid():
+            amount = form.cleaned_data["Amount"]
+            if amount < 0:
+                raise Exception("cant add negative amount")
+
+            #Add asset to db
+            Holding.objects.update_or_create(asset=form.cleaned_data["Asset"], defaults={"amount":form.cleaned_data["Amount"]})
+            messages.success(request, "Holding added or modified")
+
+
+
+    else:
+
+        form = AddHoldingForm()
+
+
+
+
+
+    return render(request, 'addholding.html', {'form': form,})
+

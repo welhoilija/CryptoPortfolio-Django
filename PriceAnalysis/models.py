@@ -34,3 +34,12 @@ class price(models.Model):
     def __str__(self):
         return "%s %s" % (self.price, self.created_at)
 
+class Holding(models.Model):
+
+    asset = models.ForeignKey(Asset, on_delete=models.CASCADE)
+
+    #some assets have a lot of decimals in the base units...
+    amount = models.DecimalField(max_digits=65, decimal_places=19)
+
+
+

@@ -7,5 +7,6 @@ urlpatterns = [
 	path("chart", views.charttest, name="charttest"),
 	path("asset/<str:asset_id>", views.assetview, name="assetview"),
 	path("addasset", views.addasset, name="addassetview"),
+	path("addHolding", views.addHolding, name="addHoldingview"),
 
 ]
