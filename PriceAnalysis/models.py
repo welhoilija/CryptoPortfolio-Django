@@ -25,7 +25,9 @@ class price(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
 
-    price = models.DecimalField(decimal_places=2, max_digits=12)
+    last_price = models.DecimalField(decimal_places=2, max_digits=12)
+
+    pricechange = models.DecimalField(decimal_places=5, max_digits=8, default=None, null = True)
 
     
 
