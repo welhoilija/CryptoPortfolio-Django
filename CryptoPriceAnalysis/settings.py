@@ -19,7 +19,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
+# SECURITY WARNING: keep the secret     key used in production secret!
 SECRET_KEY = 'django-insecure-4hio=r6@eu$r%t)qm$5cjz=#w@0iwh^0v%(-+!u9(af+=d!9ju'
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     "celery",
     'django_extensions',
+    "customers",
     "PriceAnalysis",
     'django.contrib.admin',
     'django.contrib.auth',
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'web3auth.apps.Web3AuthConfig',
 ]
 
 MIDDLEWARE = [
@@ -101,7 +103,7 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
+AUTH_USER_MODEL="customers.User"
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
@@ -130,7 +132,11 @@ CELERY_TASK_TIME_LIMIT = 30 * 60
 
 STATIC_URL = '/static/'
 
+STATIC_ROOT = "/Users/tuomas/Documents/CryptoPriceAnalysis/CryptoPriceAnalysis/static"
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+WEB3AUTH_USER_ADDRESS_FIELD = "address"
+WEB3AUTH_USER_SIGNUP_FIELDS = ["username"]

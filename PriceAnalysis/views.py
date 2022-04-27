@@ -175,3 +175,12 @@ def addHolding(request):
 
     return render(request, 'addholding.html', {'form': form,})
 
+def login(request):
+    if request.method == 'POST':
+        pass
+
+    context = {}
+    return render(request, 'login.html', context)
+
+
+
