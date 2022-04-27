@@ -1,0 +1,104 @@
+<html>
+
+<head>
+
+    <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Your Crypto Portfolio | Login</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        
+</head>
+
+<body style="background-color: blue;">
+
+    <div class="container">
+
+        <!-- Outer Row -->
+        <div class="row text-center">
+
+            <div class="col-xl-12">
+
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+
+                            <div class="col-lg-12 text-center">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                                    </div>
+                                    {% load static %}
+                                    <script src="{% static 'web3auth/js/web3auth.js' %}"></script>
+                                    
+                                    <div class="row m-t-2">
+										<button type="button" onclick="startLogin()">Login with WEB3</button>
+									</div>
+                                    <form class="user" data-bitwarden-watching="1">
+                                        <div class="form-group">
+                                            <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address...">
+                                        </div>
+                                        <br>
+                                        <div class="form-group">
+                                            <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
+                                        </div>
+                                        <br>
+
+                                        <a href="index.html" class="btn btn-primary btn-user btn-block">
+                                            Login
+                                        </a>
+                                    </form>
+                                    <hr>
+                                    <div class="text-center">
+                                        <a class="small" href="/signup">Create an Account!</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <script>
+      function startLogin() {
+        if (typeof web3 !== 'undefined') {
+          checkWeb3(function (loggedIn) {
+            if (!loggedIn) {
+              alert("Please unlock your web3 provider (probably, Metamask)")
+            } else {
+              var login_url = '{% url 'web3auth:web3auth_login_api' %}';
+              web3Login(login_url, console.log, console.log, console.log, console.log, console.log, function (resp) {
+                window.location.replace(resp.redirect_url);
+              });
+            }
+          });
+
+        } else {
+          alert('web3 missing');
+        }
+      }
+    </script>
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+
+
+</body>
+</html>
