@@ -71,6 +71,7 @@ def home(request):
     "holdings": holdings,
     "AddAssetform": AddAssetform,
     "AddHoldingForm": AddHoldingform,
+    "user": user,
     }
 
     return render(request, "home.html", context)
