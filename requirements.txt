@@ -3,7 +3,7 @@ aiohttp==3.8.1
 aiosignal==1.2.0
 amqp==5.0.9
 appnope==0.1.2
-asgiref==3.5.0
+asgiref
 asttokens==2.0.5
 async-timeout==4.0.2
 attrs==21.4.0

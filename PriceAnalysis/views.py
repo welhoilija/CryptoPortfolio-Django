@@ -8,6 +8,7 @@ from django.contrib import messages
 
 
 def home(request):
+    user = request.user
     assets = Asset.objects.all()
     holdings = Holding.objects.all()
 
@@ -58,10 +59,13 @@ def home(request):
     else:
 
         AddHoldingform = AddHoldingForm(prefix="Add Holding")
-
+    if len(holdings) > 0:
+        largest_asset =  max(holdings_by_value, key=holdings_by_value.get)
+    else:
+        largest_asset = None
 
     context = {
-    "largest_asset": max(holdings_by_value, key=holdings_by_value.get),
+    "largest_asset": largest_asset,
     "total_balance": round(total_balance),
     "assets": assets,
     "holdings": holdings,
