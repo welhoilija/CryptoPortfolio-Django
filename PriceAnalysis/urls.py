@@ -8,5 +8,6 @@ urlpatterns = [
 	path("asset/<str:asset_id>", views.assetview, name="assetview"),
 	path("addasset", views.addasset, name="addassetview"),
 	path("addHolding", views.addHolding, name="addHoldingview"),
+	path("login", views.login, name="loginview"),
 
 ]
