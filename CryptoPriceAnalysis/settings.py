@@ -143,3 +143,5 @@ STATIC_ROOT = "/Users/tuomas/Documents/CryptoPriceAnalysis/CryptoPriceAnalysis/s
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 WEB3AUTH_USER_ADDRESS_FIELD = "address"
 WEB3AUTH_USER_SIGNUP_FIELDS = ["username"]
+
+LOGIN_REDIRECT_URL = "portfolio"

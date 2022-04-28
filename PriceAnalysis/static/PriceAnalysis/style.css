@@ -1,0 +1,147 @@
+.loader-wrapper {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: #004aad;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#logo path:nth-child(1){
+	stroke-dasharray: 100%;
+	stroke-dashoffset: 100%;
+	animation: line-anim 2s ease forwards;
+
+}
+#logo path:nth-child(2){
+	stroke-dasharray: 100%;
+	stroke-dashoffset: 100%;
+	animation: line-anim 2s ease forwards 0.1s;
+	
+}
+#logo path:nth-child(3){
+	stroke-dasharray: 100%;
+	stroke-dashoffset: 100%;
+	animation: line-anim 2s ease forwards 0.2s;
+	
+}
+#logo path:nth-child(4){
+	stroke-dasharray: 100%;
+	stroke-dashoffset: 100%;
+	animation: line-anim 2s ease forwards 0.3s;
+}
+#logo path:nth-child(5){
+	stroke-dasharray: 100%;
+	stroke-dashoffset: 100%;
+	animation: line-anim 2s ease forwards 0.4s;
+	
+}
+#logo path:nth-child(6){
+	stroke-dasharray: 100%;
+	stroke-dashoffset: 100%;
+	animation: line-anim 2s ease forwards 0.5s;
+}
+#logo path:nth-child(7){
+	stroke-dasharray: 100%;
+	stroke-dashoffset: 100%;
+	animation: line-anim 2s ease forwards 0.6s;
+}
+#logo path:nth-child(8){
+	stroke-dasharray: 100%;
+	stroke-dashoffset: 100%;
+	animation: line-anim 2s ease forwards 0.7s;
+}
+#logo path:nth-child(9){
+	stroke-dasharray: 100%;
+	stroke-dashoffset: 100%;
+	animation: line-anim 2s ease forwards 0.8s;
+}
+#logo path:nth-child(10){
+	stroke-dasharray: 100%;
+	stroke-dashoffset: 100%;
+	animation: line-anim 2s ease forwards 0.9s;
+}
+#logo path:nth-child(11){
+	stroke-dasharray: 100%;
+	stroke-dashoffset: 100%;
+	animation: line-anim 2s ease forwards 1s;
+}
+#logo path:nth-child(12){
+	stroke-dasharray: 100%;
+	stroke-dashoffset: 100%;
+	animation: line-anim 2s ease forwards 1.1s;
+}
+#logo path:nth-child(13){
+	stroke-dasharray: 100%;
+	stroke-dashoffset: 100%;
+	animation: line-anim 2s ease forwards 1.2s;
+}
+#logo path:nth-child(14){
+	stroke-dasharray: 100%;
+	stroke-dashoffset: 100%;
+	animation: line-anim 2s ease forwards 1.3s;
+}
+#logo path:nth-child(15){
+	stroke-dasharray: 100%;
+	stroke-dashoffset: 100%;
+	animation: line-anim 2s ease forwards 1.4s;
+}
+#logo path:nth-child(16){
+	stroke-dasharray: 100%;
+	stroke-dashoffset: 100%;
+	animation: line-anim 2s ease forwards 1.5s;
+}
+#logo path:nth-child(17){
+	stroke-dasharray: 100%;
+	stroke-dashoffset: 100%;
+	animation: line-anim 2s ease forwards 1.6s;
+}
+#logo path:nth-child(18){
+	stroke-dasharray: 100%;
+	stroke-dashoffset: 100%;
+	animation: line-anim 2s ease forwards 1.7s;
+}
+#logo path:nth-child(19){
+	stroke-dasharray: 100%;
+	stroke-dashoffset: 100%;
+	animation: line-anim 2s ease forwards 1.8s;
+}
+#logo path:nth-child(20){
+	stroke-dasharray: 100%;
+	stroke-dashoffset: 100%;
+	animation: line-anim 2s ease forwards 1.9s;
+}
+#logo path:nth-child(21){
+	stroke-dasharray: 100%;
+	stroke-dashoffset: 100%;
+	animation: line-anim 2s ease forwards 2s; 
+}
+#logo path:nth-child(22){
+	stroke-dasharray: 100%;
+	stroke-dashoffset: 100%;
+	animation: line-anim 2s ease forwards 2.1s;
+}
+#logo path:nth-child(23){
+	stroke-dasharray: 100%;
+	stroke-dashoffset: 100%;
+	animation: line-anim 2s ease forwards 2.2s;
+}
+#logo path:nth-child(24){
+	stroke-dasharray: 100%;
+	stroke-dashoffset: 100%;
+	animation: line-anim 2s ease forwards 2.3s;
+}
+#logo path:nth-child(25){
+	stroke-dasharray: 100%;
+	stroke-dashoffset: 100%;
+	animation: line-anim 2s ease forwards 2.4s;
+}
+
+@keyframes line-anim {
+	to {
+		stroke-dashoffset: 0%;
+	}
+}

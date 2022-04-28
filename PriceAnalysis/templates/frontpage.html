@@ -1,0 +1,204 @@
+{% extends "base.html" %}
+
+
+{% block title %}{{ section.title }}{% endblock %}
+
+{% load multiply %}
+{% load tofloat %}
+
+
+{% block content %}
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
+
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'PriceAnalysis/style.css' %}">
+    </head>
+    <body>
+
+        <!-- Header-->
+        <header class="bg-dark py-5">
+
+            <div class="container px-5">
+                <div class="row gx-5 justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="text-center my-5">
+                            <h1 class="display-5 fw-bolder text-white mb-2">Track your assets easily and reliably</h1>
+                            <p class="lead text-white-50 mb-4">Quickly track all your cryptocurrency assets </p>
+                            <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
+                                <a class="btn btn-primary btn-lg px-4 me-sm-3" href="sign-up">Get Started</a>
+                                <a class="btn btn-outline-light btn-lg px-4" href="portfolio">Check it out</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Features section-->
+        <section class="py-5 border-bottom" id="features">
+            <div class="container px-5 my-5">
+                <div class="row gx-5">
+                    <div class="col-lg-4 mb-5 mb-lg-0 ">
+                        <div class="card shadow mb-4 p-3">
+                            <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-collection"></i></div>
+                            <h2 class="h4 fw-bolder">Web3 login</h2>
+                            <p>Dont waste your time registering with long forms, your Web3 signature is all we need!</p>
+                            <a class="text-decoration-none" href="sign-up">
+                                Sign up!
+                                <i class="bi bi-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 mb-5 mb-lg-0">
+                        <div class="card shadow mb-4 p-3">
+                            <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-building"></i></div>
+                            <h2 class="h4 fw-bolder">Unlimited Assets</h2>
+                            <p>Use any tickers from binance or other major cryptocurrency marketplaces</p>
+                            <a class="text-decoration-none" href="portfolio">
+                                Check it out!
+                                <i class="bi bi-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card shadow mb-4 p-3">
+                            <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-toggles2"></i></div>
+                            <h2 class="h4 fw-bolder">Request a feature</h2>
+                            <p>I'm always happy to improve this platform, send me a message!</p>
+                            <a class="text-decoration-none" href="#Contact">
+                                Contact
+                                <i class="bi bi-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Contact section-->
+        <section class="bg-light py-5">
+            <div class="container px-5 my-5 px-5">
+                <div class="text-center mb-5">
+                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-envelope"></i></div>
+                    <h2 class="fw-bolder">Get in touch</h2>
+                    <p class="lead mb-0">We'd love to hear from you</p>
+                </div>
+                <div class="row gx-5 justify-content-center">
+                    <div class="col-lg-6">
+                        <!-- * * * * * * * * * * * * * * *-->
+                        <!-- * * SB Forms Contact Form * *-->
+                        <!-- * * * * * * * * * * * * * * *-->
+                        <!-- This form is pre-integrated with SB Forms.-->
+                        <!-- To make this form functional, sign up at-->
+                        <!-- https://startbootstrap.com/solution/contact-forms-->
+                        <!-- to get an API token!-->
+                        <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+                            <!-- Name input-->
+                            <div class="form-floating mb-3">
+                                <input class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />
+                                <label for="name">Full name</label>
+                                <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
+                            </div>
+                            <!-- Email address input-->
+                            <div class="form-floating mb-3">
+                                <input class="form-control" id="email" type="email" placeholder="name@example.com" data-sb-validations="required,email" />
+                                <label for="email">Email address</label>
+                                <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
+                                <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
+                            </div>
+                            <!-- Phone number input-->
+                            <div class="form-floating mb-3">
+                                <input class="form-control" id="phone" type="tel" placeholder="(123) 456-7890" data-sb-validations="required" />
+                                <label for="phone">Phone number</label>
+                                <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
+                            </div>
+                            <!-- Message input-->
+                            <div class="form-floating mb-3">
+                                <textarea class="form-control" id="message" type="text" placeholder="Enter your message here..." style="height: 10rem" data-sb-validations="required"></textarea>
+                                <label for="message">Message</label>
+                                <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
+                            </div>
+                            <!-- Submit success message-->
+                            <!---->
+                            <!-- This is what your users will see when the form-->
+                            <!-- has successfully submitted-->
+                            <div class="d-none" id="submitSuccessMessage">
+                                <div class="text-center mb-3">
+                                    <div class="fw-bolder">Form submission successful!</div>
+                                    To activate this form, sign up at
+                                    <br />
+                                    <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+                                </div>
+                            </div>
+                            <!-- Submit error message-->
+                            <!---->
+                            <!-- This is what your users will see when there is-->
+                            <!-- an error submitting the form-->
+                            <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
+                            <!-- Submit Button-->
+                            <div class="d-grid"><button class="btn btn-primary btn-lg disabled" id="submitButton" type="submit">Submit</button></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>
+<script type="text/javascript">
+    const logo = document.querySelectorAll("#logo path");
+    for (let i = 0; i<logo.length; i++){
+        console.log('Letter ${i} is ${logo[i].getTotalLength()}')
+    }
+    
+</script>
+<div class="loader-wrapper">
+    <svg width="791" height="79" viewBox="0 0 791 79" fill="none" xmlns="http://www.w3.org/2000/svg" id="logo">
+    <mask id="path-1-outside-1_1_4" maskUnits="userSpaceOnUse" x="0.127991" y="0.223999" width="791" height="79" fill="black">
+    <rect fill="white" x="0.127991" y="0.223999" width="791" height="79"/>
+    <path d="M5.12799 39.496C5.12799 32.968 6.59999 27.112 9.54399 21.928C12.488 16.68 16.488 12.584 21.544 9.64C26.664 6.696 32.328 5.224 38.536 5.224C45.832 5.224 52.2 6.984 57.64 10.504C63.08 14.024 67.048 19.016 69.544 25.48H59.08C57.224 21.448 54.536 18.344 51.016 16.168C47.56 13.992 43.4 12.904 38.536 12.904C33.864 12.904 29.672 13.992 25.96 16.168C22.248 18.344 19.336 21.448 17.224 25.48C15.112 29.448 14.056 34.12 14.056 39.496C14.056 44.808 15.112 49.48 17.224 53.512C19.336 57.48 22.248 60.552 25.96 62.728C29.672 64.904 33.864 65.992 38.536 65.992C43.4 65.992 47.56 64.936 51.016 62.824C54.536 60.648 57.224 57.544 59.08 53.512H69.544C67.048 59.912 63.08 64.872 57.64 68.392C52.2 71.848 45.832 73.576 38.536 73.576C32.328 73.576 26.664 72.136 21.544 69.256C16.488 66.312 12.488 62.248 9.54399 57.064C6.59999 51.88 5.12799 46.024 5.12799 39.496Z"/>
+    <path d="M117.78 73L101.844 45.64H91.2842V73H82.5482V6.088H104.148C109.204 6.088 113.46 6.952 116.916 8.68C120.436 10.408 123.06 12.744 124.788 15.688C126.516 18.632 127.38 21.992 127.38 25.768C127.38 30.376 126.036 34.44 123.348 37.96C120.724 41.48 116.756 43.816 111.444 44.968L128.244 73H117.78ZM91.2842 38.632H104.148C108.884 38.632 112.436 37.48 114.804 35.176C117.172 32.808 118.356 29.672 118.356 25.768C118.356 21.8 117.172 18.728 114.804 16.552C112.5 14.376 108.948 13.288 104.148 13.288H91.2842V38.632Z"/>
+    <path d="M187.802 6.088L166.01 47.752V73H157.274V47.752L135.386 6.088H145.082L161.594 39.976L178.106 6.088H187.802Z"/>
+    <path d="M241.753 25.672C241.753 31.24 239.833 35.88 235.993 39.592C232.217 43.24 226.425 45.064 218.617 45.064H205.753V73H197.017V6.088H218.617C226.169 6.088 231.897 7.912 235.801 11.56C239.769 15.208 241.753 19.912 241.753 25.672ZM218.617 37.864C223.481 37.864 227.065 36.808 229.369 34.696C231.673 32.584 232.825 29.576 232.825 25.672C232.825 17.416 228.089 13.288 218.617 13.288H205.753V37.864H218.617Z"/>
+    <path d="M293.795 6.088V13.192H275.555V73H266.819V13.192H248.483V6.088H293.795Z"/>
+    <path d="M334.884 73.672C328.676 73.672 323.012 72.232 317.892 69.352C312.772 66.408 308.708 62.344 305.7 57.16C302.756 51.912 301.284 46.024 301.284 39.496C301.284 32.968 302.756 27.112 305.7 21.928C308.708 16.68 312.772 12.616 317.892 9.736C323.012 6.792 328.676 5.32 334.884 5.32C341.156 5.32 346.852 6.792 351.972 9.736C357.092 12.616 361.124 16.648 364.068 21.832C367.012 27.016 368.484 32.904 368.484 39.496C368.484 46.088 367.012 51.976 364.068 57.16C361.124 62.344 357.092 66.408 351.972 69.352C346.852 72.232 341.156 73.672 334.884 73.672ZM334.884 66.088C339.556 66.088 343.748 65 347.46 62.824C351.236 60.648 354.18 57.544 356.292 53.512C358.468 49.48 359.556 44.808 359.556 39.496C359.556 34.12 358.468 29.448 356.292 25.48C354.18 21.448 351.268 18.344 347.556 16.168C343.844 13.992 339.62 12.904 334.884 12.904C330.148 12.904 325.924 13.992 322.212 16.168C318.5 18.344 315.556 21.448 313.38 25.48C311.268 29.448 310.212 34.12 310.212 39.496C310.212 44.808 311.268 49.48 313.38 53.512C315.556 57.544 318.5 60.648 322.212 62.824C325.988 65 330.212 66.088 334.884 66.088Z"/>
+    <path d="M421.201 6.088V13.192H402.961V73H394.225V13.192H375.889V6.088H421.201Z"/>
+    <path d="M467.186 73L451.25 45.64H440.69V73H431.954V6.088H453.555C458.611 6.088 462.867 6.952 466.323 8.68C469.843 10.408 472.466 12.744 474.194 15.688C475.922 18.632 476.786 21.992 476.786 25.768C476.786 30.376 475.443 34.44 472.755 37.96C470.131 41.48 466.162 43.816 460.85 44.968L477.651 73H467.186ZM440.69 38.632H453.555C458.291 38.632 461.843 37.48 464.211 35.176C466.579 32.808 467.763 29.672 467.763 25.768C467.763 21.8 466.579 18.728 464.211 16.552C461.907 14.376 458.355 13.288 453.555 13.288H440.69V38.632Z"/>
+    <path d="M529.913 58.12H500.729L495.353 73H486.137L510.329 6.472H520.409L544.505 73H535.289L529.913 58.12ZM527.417 51.016L515.321 17.224L503.225 51.016H527.417Z"/>
+    <path d="M551.784 39.496C551.784 32.968 553.256 27.112 556.2 21.928C559.144 16.68 563.144 12.584 568.2 9.64C573.32 6.696 578.984 5.224 585.192 5.224C592.488 5.224 598.856 6.984 604.296 10.504C609.736 14.024 613.704 19.016 616.2 25.48H605.736C603.88 21.448 601.192 18.344 597.672 16.168C594.216 13.992 590.056 12.904 585.192 12.904C580.52 12.904 576.328 13.992 572.616 16.168C568.904 18.344 565.992 21.448 563.88 25.48C561.768 29.448 560.712 34.12 560.712 39.496C560.712 44.808 561.768 49.48 563.88 53.512C565.992 57.48 568.904 60.552 572.616 62.728C576.328 64.904 580.52 65.992 585.192 65.992C590.056 65.992 594.216 64.936 597.672 62.824C601.192 60.648 603.88 57.544 605.736 53.512H616.2C613.704 59.912 609.736 64.872 604.296 68.392C598.856 71.848 592.488 73.576 585.192 73.576C578.984 73.576 573.32 72.136 568.2 69.256C563.144 66.312 559.144 62.248 556.2 57.064C553.256 51.88 551.784 46.024 551.784 39.496Z"/>
+    <path d="M665.492 73L637.94 42.472V73H629.205V6.088H637.94V37.096L665.589 6.088H676.628L646.292 39.592L676.917 73H665.492Z"/>
+    <path d="M695.409 13.192V35.56H719.793V42.76H695.409V65.8H722.673V73H686.673V5.992H722.673V13.192H695.409Z"/>
+    <path d="M771.124 73L755.188 45.64H744.628V73H735.892V6.088H757.492C762.548 6.088 766.804 6.952 770.26 8.68C773.78 10.408 776.404 12.744 778.132 15.688C779.86 18.632 780.724 21.992 780.724 25.768C780.724 30.376 779.38 34.44 776.692 37.96C774.068 41.48 770.1 43.816 764.788 44.968L781.588 73H771.124ZM744.628 38.632H757.492C762.228 38.632 765.78 37.48 768.148 35.176C770.516 32.808 771.7 29.672 771.7 25.768C771.7 21.8 770.516 18.728 768.148 16.552C765.844 14.376 762.292 13.288 757.492 13.288H744.628V38.632Z"/>
+    </mask>
+    <path d="M5.12799 39.496C5.12799 32.968 6.59999 27.112 9.54399 21.928C12.488 16.68 16.488 12.584 21.544 9.64C26.664 6.696 32.328 5.224 38.536 5.224C45.832 5.224 52.2 6.984 57.64 10.504C63.08 14.024 67.048 19.016 69.544 25.48H59.08C57.224 21.448 54.536 18.344 51.016 16.168C47.56 13.992 43.4 12.904 38.536 12.904C33.864 12.904 29.672 13.992 25.96 16.168C22.248 18.344 19.336 21.448 17.224 25.48C15.112 29.448 14.056 34.12 14.056 39.496C14.056 44.808 15.112 49.48 17.224 53.512C19.336 57.48 22.248 60.552 25.96 62.728C29.672 64.904 33.864 65.992 38.536 65.992C43.4 65.992 47.56 64.936 51.016 62.824C54.536 60.648 57.224 57.544 59.08 53.512H69.544C67.048 59.912 63.08 64.872 57.64 68.392C52.2 71.848 45.832 73.576 38.536 73.576C32.328 73.576 26.664 72.136 21.544 69.256C16.488 66.312 12.488 62.248 9.54399 57.064C6.59999 51.88 5.12799 46.024 5.12799 39.496Z" stroke="white" stroke-width="10" mask="url(#path-1-outside-1_1_4)"/>
+    <path d="M117.78 73L101.844 45.64H91.2842V73H82.5482V6.088H104.148C109.204 6.088 113.46 6.952 116.916 8.68C120.436 10.408 123.06 12.744 124.788 15.688C126.516 18.632 127.38 21.992 127.38 25.768C127.38 30.376 126.036 34.44 123.348 37.96C120.724 41.48 116.756 43.816 111.444 44.968L128.244 73H117.78ZM91.2842 38.632H104.148C108.884 38.632 112.436 37.48 114.804 35.176C117.172 32.808 118.356 29.672 118.356 25.768C118.356 21.8 117.172 18.728 114.804 16.552C112.5 14.376 108.948 13.288 104.148 13.288H91.2842V38.632Z" stroke="white" stroke-width="10" mask="url(#path-1-outside-1_1_4)"/>
+    <path d="M187.802 6.088L166.01 47.752V73H157.274V47.752L135.386 6.088H145.082L161.594 39.976L178.106 6.088H187.802Z" stroke="white" stroke-width="10" mask="url(#path-1-outside-1_1_4)"/>
+    <path d="M241.753 25.672C241.753 31.24 239.833 35.88 235.993 39.592C232.217 43.24 226.425 45.064 218.617 45.064H205.753V73H197.017V6.088H218.617C226.169 6.088 231.897 7.912 235.801 11.56C239.769 15.208 241.753 19.912 241.753 25.672ZM218.617 37.864C223.481 37.864 227.065 36.808 229.369 34.696C231.673 32.584 232.825 29.576 232.825 25.672C232.825 17.416 228.089 13.288 218.617 13.288H205.753V37.864H218.617Z" stroke="white" stroke-width="10" mask="url(#path-1-outside-1_1_4)"/>
+    <path d="M293.795 6.088V13.192H275.555V73H266.819V13.192H248.483V6.088H293.795Z" stroke="white" stroke-width="10" mask="url(#path-1-outside-1_1_4)"/>
+    <path d="M334.884 73.672C328.676 73.672 323.012 72.232 317.892 69.352C312.772 66.408 308.708 62.344 305.7 57.16C302.756 51.912 301.284 46.024 301.284 39.496C301.284 32.968 302.756 27.112 305.7 21.928C308.708 16.68 312.772 12.616 317.892 9.736C323.012 6.792 328.676 5.32 334.884 5.32C341.156 5.32 346.852 6.792 351.972 9.736C357.092 12.616 361.124 16.648 364.068 21.832C367.012 27.016 368.484 32.904 368.484 39.496C368.484 46.088 367.012 51.976 364.068 57.16C361.124 62.344 357.092 66.408 351.972 69.352C346.852 72.232 341.156 73.672 334.884 73.672ZM334.884 66.088C339.556 66.088 343.748 65 347.46 62.824C351.236 60.648 354.18 57.544 356.292 53.512C358.468 49.48 359.556 44.808 359.556 39.496C359.556 34.12 358.468 29.448 356.292 25.48C354.18 21.448 351.268 18.344 347.556 16.168C343.844 13.992 339.62 12.904 334.884 12.904C330.148 12.904 325.924 13.992 322.212 16.168C318.5 18.344 315.556 21.448 313.38 25.48C311.268 29.448 310.212 34.12 310.212 39.496C310.212 44.808 311.268 49.48 313.38 53.512C315.556 57.544 318.5 60.648 322.212 62.824C325.988 65 330.212 66.088 334.884 66.088Z" stroke="white" stroke-width="10" mask="url(#path-1-outside-1_1_4)"/>
+    <path d="M421.201 6.088V13.192H402.961V73H394.225V13.192H375.889V6.088H421.201Z" stroke="white" stroke-width="10" mask="url(#path-1-outside-1_1_4)"/>
+    <path d="M467.186 73L451.25 45.64H440.69V73H431.954V6.088H453.555C458.611 6.088 462.867 6.952 466.323 8.68C469.843 10.408 472.466 12.744 474.194 15.688C475.922 18.632 476.786 21.992 476.786 25.768C476.786 30.376 475.443 34.44 472.755 37.96C470.131 41.48 466.162 43.816 460.85 44.968L477.651 73H467.186ZM440.69 38.632H453.555C458.291 38.632 461.843 37.48 464.211 35.176C466.579 32.808 467.763 29.672 467.763 25.768C467.763 21.8 466.579 18.728 464.211 16.552C461.907 14.376 458.355 13.288 453.555 13.288H440.69V38.632Z" stroke="white" stroke-width="10" mask="url(#path-1-outside-1_1_4)"/>
+    <path d="M529.913 58.12H500.729L495.353 73H486.137L510.329 6.472H520.409L544.505 73H535.289L529.913 58.12ZM527.417 51.016L515.321 17.224L503.225 51.016H527.417Z" stroke="white" stroke-width="10" mask="url(#path-1-outside-1_1_4)"/>
+    <path d="M551.784 39.496C551.784 32.968 553.256 27.112 556.2 21.928C559.144 16.68 563.144 12.584 568.2 9.64C573.32 6.696 578.984 5.224 585.192 5.224C592.488 5.224 598.856 6.984 604.296 10.504C609.736 14.024 613.704 19.016 616.2 25.48H605.736C603.88 21.448 601.192 18.344 597.672 16.168C594.216 13.992 590.056 12.904 585.192 12.904C580.52 12.904 576.328 13.992 572.616 16.168C568.904 18.344 565.992 21.448 563.88 25.48C561.768 29.448 560.712 34.12 560.712 39.496C560.712 44.808 561.768 49.48 563.88 53.512C565.992 57.48 568.904 60.552 572.616 62.728C576.328 64.904 580.52 65.992 585.192 65.992C590.056 65.992 594.216 64.936 597.672 62.824C601.192 60.648 603.88 57.544 605.736 53.512H616.2C613.704 59.912 609.736 64.872 604.296 68.392C598.856 71.848 592.488 73.576 585.192 73.576C578.984 73.576 573.32 72.136 568.2 69.256C563.144 66.312 559.144 62.248 556.2 57.064C553.256 51.88 551.784 46.024 551.784 39.496Z" stroke="white" stroke-width="10" mask="url(#path-1-outside-1_1_4)"/>
+    <path d="M665.492 73L637.94 42.472V73H629.205V6.088H637.94V37.096L665.589 6.088H676.628L646.292 39.592L676.917 73H665.492Z" stroke="white" stroke-width="10" mask="url(#path-1-outside-1_1_4)"/>
+    <path d="M695.409 13.192V35.56H719.793V42.76H695.409V65.8H722.673V73H686.673V5.992H722.673V13.192H695.409Z" stroke="white" stroke-width="10" mask="url(#path-1-outside-1_1_4)"/>
+    <path d="M771.124 73L755.188 45.64H744.628V73H735.892V6.088H757.492C762.548 6.088 766.804 6.952 770.26 8.68C773.78 10.408 776.404 12.744 778.132 15.688C779.86 18.632 780.724 21.992 780.724 25.768C780.724 30.376 779.38 34.44 776.692 37.96C774.068 41.48 770.1 43.816 764.788 44.968L781.588 73H771.124ZM744.628 38.632H757.492C762.228 38.632 765.78 37.48 768.148 35.176C770.516 32.808 771.7 29.672 771.7 25.768C771.7 21.8 770.516 18.728 768.148 16.552C765.844 14.376 762.292 13.288 757.492 13.288H744.628V38.632Z" stroke="white" stroke-width="10" mask="url(#path-1-outside-1_1_4)"/>
+    </svg>
+
+</div>
+
+
+<script type="text/javascript">
+    $(window).on("load",function(){
+     $(".loader-wrapper").fadeOut(2000);
+});</script>
+
+
+{% endblock %}

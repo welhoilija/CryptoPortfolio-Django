@@ -3,14 +3,18 @@ from .models import *
 from django.http import JsonResponse, HttpResponseRedirect
 from .forms import *
 from django.contrib import messages
-
+from django.contrib.auth import logout
+from django.views.decorators.csrf import ensure_csrf_cookie
 # Create your views here.
 
 
 def home(request):
     user = request.user
     assets = Asset.objects.all()
-    holdings = Holding.objects.all()
+    if not user.is_anonymous:
+        holdings = user.holdings.all()
+    else:
+        holdings = []
 
 
     total_balance = 0
@@ -28,7 +32,7 @@ def home(request):
 
 
         # create a form instance and populate it with data from the request:
-        AddAssetform = AddAssetForm(request.POST, prefix="Add Asset")
+        AddAssetform = AddAssetForm(user, request.POST, prefix="Add Asset")
 
         
         # check whether the form is valid:
@@ -40,25 +44,27 @@ def home(request):
                 Asset.objects.create(ticker=AddAssetform.cleaned_data["Asset_ticker"], desc=AddAssetform.cleaned_data['Asset_Description'])
                 messages.success(request, "Asset added")
     else:
-        AddAssetform = AddAssetForm(prefix="Add Asset")
+        AddAssetform = AddAssetForm(user, prefix="Add Asset")
 
     if request.method == 'POST' and not AddAssetform.is_valid():
         #If addassetform is not valid, then it must be the holdingform
-        AddHoldingform = AddHoldingForm(request.POST, prefix="Add Holding")
-        AddAssetform = AddAssetForm(prefix="Add Asset")
+        AddHoldingform = AddHoldingForm(user, request.POST, prefix="Add Holding")
+        AddAssetform = AddAssetForm(user ,prefix="Add Asset")
         if AddHoldingform.is_valid():
             amount = AddHoldingform.cleaned_data["Amount"]
             if amount < 0:
                 raise Exception("cant add negative amount")
 
             #Add asset to db
-            Holding.objects.update_or_create(asset=AddHoldingform.cleaned_data["Asset"], defaults={"amount":AddHoldingform.cleaned_data["Amount"]})
+            holding = Holding.objects.update_or_create(asset=AddHoldingform.cleaned_data["Asset"], defaults={"amount":AddHoldingform.cleaned_data["Amount"]})
             messages.success(request, "Holding added or modified")
+            user.holdings.add(holding[0])
+            user.save()
 
 
     else:
 
-        AddHoldingform = AddHoldingForm(prefix="Add Holding")
+        AddHoldingform = AddHoldingForm(user ,prefix="Add Holding")
     if len(holdings) > 0:
         largest_asset =  max(holdings_by_value, key=holdings_by_value.get)
     else:
@@ -74,7 +80,7 @@ def home(request):
     "user": user,
     }
 
-    return render(request, "home.html", context)
+    return render(request, "portfolio.html", context)
 
 def charttest(request):
     return render(request, "charttest.html")
@@ -175,7 +181,7 @@ def addHolding(request):
 
 
     return render(request, 'addholding.html', {'form': form,})
-
+@ensure_csrf_cookie
 def login(request):
     if request.method == 'POST':
         pass
@@ -185,3 +191,18 @@ def login(request):
 
 
 
+def frontpage(request):
+
+    context = {
+        "user": request.user,
+    }
+    return render(request, 'frontpage.html', context)
+
+
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect("/")
+    
+def loading_view(request):
+    return render(request, "loading.html")
+    pass
