@@ -88,6 +88,9 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
+AUTHENTICATION_BACKENDS = [
+'web3auth.backend.Web3Backend'
+]
 
 AUTH_PASSWORD_VALIDATORS = [
     {

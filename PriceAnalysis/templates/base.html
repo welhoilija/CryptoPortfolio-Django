@@ -29,7 +29,16 @@
 
                     </ul>
                 </div>
-                <a class="navbar-brand" href="/">Welcome {{ user }}</a>
+                {% if not user.is_anonymous %}
+                <div class="btn btn-primary px-5 mx-5">
+                    <a class="navbar-brand" href="/">Welcome {{ user.username }}</a>
+                </div>
+                {% else %}
+                <div class="btn btn-primary px-5 mx-5">
+                    <a class="navbar-brand" href="login">LOGIN</a>
+                </div>
+
+                {% endif %}
             </div>
         </nav>
         <!-- Page content-->
