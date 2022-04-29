@@ -25,25 +25,26 @@
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Home</a></li>
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="portfolio">Portfolio</a></li>
+                        {% if not user.is_anonymous %}
+
+                        <li class="nav-item"><a class="nav-link active" aria-current="page">Welcome {{ user.username }}</a></li>
+
+                        <div class="btn btn-primary px-5">
+                            <a class="navbar-brand" href="logout">Logout</a>
+                        </div>
+                        {% else %}
+                        <div class="btn btn-primary px-5 mx-5">
+                            <a class="navbar-brand" href="login">LOGIN</a>
+                        </div>
+                        <div class="btn btn-primary px-5">
+                            <a class="navbar-brand" href="sign-up">SIGN UP</a>
+                        </div>
+
+                        {% endif %}
 
                     </ul>
                 </div>
-                {% if not user.is_anonymous %}
-                <div class="btn btn-primary px-5 mx-5">
-                    <a class="navbar-brand" href="/">Welcome {{ user.username }}</a>
-                </div>
-                <div class="btn btn-primary px-5">
-                    <a class="navbar-brand" href="logout">Logout</a>
-                </div>
-                {% else %}
-                <div class="btn btn-primary px-5 mx-5">
-                    <a class="navbar-brand" href="login">LOGIN</a>
-                </div>
-                <div class="btn btn-primary px-5">
-                    <a class="navbar-brand" href="sign-up">SIGN UP</a>
-                </div>
-
-                {% endif %}
+                
             </div>
         </nav>
         <!-- Page content-->

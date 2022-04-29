@@ -30,19 +30,20 @@ def home(request):
         # if this is a POST request we need to process the form data
     if request.method == 'POST':
 
-
         # create a form instance and populate it with data from the request:
         AddAssetform = AddAssetForm(user, request.POST, prefix="Add Asset")
 
-        
         # check whether the form is valid:
         if AddAssetform.is_valid():
+
             if Asset.objects.filter(ticker=AddAssetform.cleaned_data['Asset_ticker']).exists():
                 messages.warning(request, 'Asset already added')
+
             else:
                 #Add asset to db
                 Asset.objects.create(ticker=AddAssetform.cleaned_data["Asset_ticker"], desc=AddAssetform.cleaned_data['Asset_Description'])
                 messages.success(request, "Asset added")
+
     else:
         AddAssetform = AddAssetForm(user, prefix="Add Asset")
 
@@ -82,8 +83,7 @@ def home(request):
 
     return render(request, "portfolio.html", context)
 
-def charttest(request):
-    return render(request, "charttest.html")
+
 
 
 def getdata(request):
@@ -206,3 +206,18 @@ def logout_view(request):
 def loading_view(request):
     return render(request, "loading.html")
     pass
+
+
+def contactview(request):
+
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Form uploaded successfully")
+
+    form = ContactForm()
+    context= {
+    "form": form
+    }
+    return render(request, "contact.html", context)

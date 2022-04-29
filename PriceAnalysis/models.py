@@ -1,5 +1,6 @@
 from django.db import models
-
+from datetime import timedelta
+from django.utils import timezone
 # Create your models here.
 
 
@@ -43,5 +44,32 @@ class Holding(models.Model):
     #some assets have a lot of decimals in the base units...
     amount = models.DecimalField(max_digits=65, decimal_places=19)
 
+
+    def __str__(self):
+        return "%s %s" % (self.asset, self.amount)
+
+
+    def calculate_PL(self, days):
+        amount = self.amount
+        asset = self.asset
+        week_ago_date = timezone.now().date() - timedelta(days=days)
+
+        price_before = price.objects.filter(created_at=week_ago_date).first()
+        price_now = price.objects.latest("created_at")
+        if price_before:
+            return price_now.last_price - price_before.last_price
+        else:
+            return None
+        pass
+
+
+class contactdata(models.Model):
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    message = models.TextField(blank=True, null=True, max_length=2000)
+    sender_mail = models.CharField(max_length=64)
+
+    def __str__(self):
+        return "%s %s" % (self.message, self.sender_mail)
 
 

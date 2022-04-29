@@ -1,5 +1,5 @@
 from django import forms
-from .models import Asset
+from .models import Asset, contactdata
 import ccxt
 from ccxt.base.errors import BadSymbol
 
@@ -34,3 +34,20 @@ class AddHoldingForm(forms.Form):
         super(AddHoldingForm, self).__init__(*args, **kwargs)
         self.fields["Asset"].widget.attrs.update({"class": "btn btn-secondary dropdown-toggle m-2 w-100", "type": "button", "id": "dropdownMenuButton1", "title": "Choose asset", "data-bs-toggle":"dropdown", "aria-expanded":"false"})
         self.fields["Amount"].widget.attrs.update({'class': 'form-control form-control-user m-2', 'title': 'Choose amount'})
+
+
+
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = contactdata
+        fields = ['message', 'sender_mail']
+        labels = {
+        "message": "Message",
+        "sender_mail": "Email",
+    }
+
+    def __init__(self, *args, **kwargs):
+        super(ContactForm, self).__init__(*args, **kwargs)
+        self.fields["message"].widget.attrs.update({'class': 'form-control form-control-lg m-2', 'title': 'Choose amount'})
+        self.fields["sender_mail"].widget.attrs.update({'class': 'form-control form-control-lg m-2', 'title': 'Choose amount'})
+
