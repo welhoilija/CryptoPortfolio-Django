@@ -6,7 +6,10 @@ from django.contrib import messages
 from django.contrib.auth import logout
 from django.views.decorators.csrf import ensure_csrf_cookie
 # Create your views here.
+from django.views.decorators.http import require_http_methods
+from django.conf import settings
 
+from web3auth.forms import SignupForm
 
 def home(request):
     user = request.user
@@ -221,3 +224,32 @@ def contactview(request):
     "form": form
     }
     return render(request, "contact.html", context)
+
+
+
+
+@require_http_methods(["GET", "POST"])
+def signup_view(request):
+    """
+    1. Creates an instance of a SignupForm.
+    2. If the registration is closed or form has errors, returns form with errors
+    3. If the form is valid, saves the user without saving to DB
+    4. Sets the user address from the form, saves it to DB
+    5. Logins the user using web3auth.backend.Web3Backend
+    6. Redirects the user to LOGIN_REDIRECT_URL or 'next' in get or post params
+    :param request: Django request
+    :param template_name: Template to render
+    :return: rendered template with form
+    """
+    form = SignupForm()
+
+    if request.method == 'POST':
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            addr_field = app_settings.WEB3AUTH_USER_ADDRESS_FIELD
+            setattr(user, addr_field, form.cleaned_data[addr_field])
+            user.save()
+            login(request, user, 'web3auth.backend.Web3Backend')
+            return redirect(get_redirect_url(request))
+    return render(request, 'signup.html', {'form': form})

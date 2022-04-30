@@ -12,7 +12,7 @@ class AddAssetForm(forms.Form):
     def __init__(self, user, *args, **kwargs):
         self.user = user
         super(AddAssetForm, self).__init__(*args, **kwargs)
-        self.fields["Asset_ticker"].widget.attrs.update({'class': 'form-control form-control-user', 'title': 'Asset in binance syntax'})
+        self.fields["Asset_ticker"].widget.attrs.update({'class': 'form-control form-control-user', 'title': 'Asset in binance syntax, such as "BTCUSDT" or "ETHUSDT"'})
         self.fields["Asset_Description"].widget.attrs.update({'class': 'form-control form-control-user', 'title': 'Asset description'})
 
     def clean_Asset_ticker(self):

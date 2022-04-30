@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+
+{% block title %}{{ section.title }}{% endblock %}
+
+
+
+{% block content %}
+
+ <div class="p-5 m-5">
+
+
+ 	<h1 class="text-center">Start tracking your portfolio with CryptoTracker now!</h1>
+
+	<form method="post">
+	  <div class="form-group">
+	    {% csrf_token %}
+    	{{ form }}
+	  </div>
+	  <button type="submit" class="btn btn-primary w-100">Register now!</button>
+	</form>
+	{% if messages %}
+	<ul class="messages">
+	    {% for message in messages %}
+	    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+	    {% endfor %}
+	</ul>
+	{% endif %}
+    
+
+</div>
+
+
+
+{% endblock %}
