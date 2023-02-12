@@ -12,7 +12,7 @@ class AccountManager(BaseUserManager):
             raise ValueError("You need an ETH address for login")
         if not username:
             raise ValueError("You need an username")
-        user= self.model( 
+        user = self.model(
             username=username,
             )
         user.set_password(password)
@@ -20,7 +20,7 @@ class AccountManager(BaseUserManager):
         return user
 
     def create_superuser(self, address, username, password=None):
-        user= self.create_user(
+        user = self.create_user(
             address=address,
             username=username,
             password=password,
@@ -31,8 +31,6 @@ class AccountManager(BaseUserManager):
         user.set_password(password)
         user.save(using=self._db)
         return user
-
-
 
 
 class User(AbstractBaseUser):
@@ -54,10 +52,8 @@ class User(AbstractBaseUser):
 
     objects = AccountManager()
 
-
     USERNAME_FIELD = "username"
     REQUIRED_FIELDS = ["address"]
-            
 
     def __str__(self):
         return self.address
