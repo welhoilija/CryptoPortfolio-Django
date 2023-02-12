@@ -2,7 +2,7 @@
 FROM python:3.9.6-slim-buster
 
 # set work directory
-WORKDIR /usr/src/CryptoPortfolio-Django
+WORKDIR /cryptoportfolio-django
 
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
