@@ -12,6 +12,7 @@ services:
       - .env.production
     volumes:
       - ./:/cryptoportfolio-django
+    restart: always
   db:
     image: postgres:latest
     volumes:
