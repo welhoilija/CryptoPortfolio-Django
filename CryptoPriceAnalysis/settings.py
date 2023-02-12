@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-
+from decouple import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,8 +25,9 @@ SECRET_KEY = 'django-insecure-4hio=r6@eu$r%t)qm$5cjz=#w@0iwh^0v%(-+!u9(af+=d!9ju
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ('0.0.0.0', 'localhost')
+SECRET_KEY = config('SECRET_KEY')
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 # Application definition
 
@@ -41,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'web3auth.apps.Web3AuthConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -80,17 +81,17 @@ WSGI_APPLICATION = 'CryptoPriceAnalysis.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'mydatabase',
+        'USER': 'myuser',
+        'PASSWORD': 'mypassword',
+        'HOST': 'db',
+        'PORT': '5432',
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
-AUTHENTICATION_BACKENDS = [
-'web3auth.backend.Web3Backend'
-]
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -106,7 +107,7 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-AUTH_USER_MODEL="customers.User"
+AUTH_USER_MODEL = "customers.User"
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
@@ -141,7 +142,5 @@ STATIC_ROOT = "/Users/tuomas/Documents/CryptoPriceAnalysis/CryptoPriceAnalysis/s
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-WEB3AUTH_USER_ADDRESS_FIELD = "address"
-WEB3AUTH_USER_SIGNUP_FIELDS = ["username"]
 
 LOGIN_REDIRECT_URL = "portfolio"
