@@ -16,70 +16,48 @@
         <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         
+        
 </head>
 
 <body style="background-color: blue;">
 
     <div class="container">
 
-        <!-- Outer Row -->
-        <div class="row text-center">
-
-            <div class="col-xl-12">
-
-                <div class="card o-hidden border-0 shadow-lg my-5">
-                    <div class="card-body p-0">
-                        <!-- Nested Row within Card Body -->
-                        <div class="row">
-
-                            <div class="col-lg-12 text-center">
-                                <div class="p-5">
-                                    <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
-                                    </div>
-                                    {% load static %}
-                                    <script src="{% static 'web3auth/js/web3auth.js' %}"></script>
-                                    
-                                    <div class="row m-t-2">
-										<button type="button" onclick="startLogin()">Login with WEB3</button>
-									</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
+      <form id="login-form">
+        <input type="hidden" id="message" value="{{ message }}">
+        <button type="submit" id="login-button">Sign In</button>
+      </form>
 
     </div>
-    <script src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js" type="text/javascript">
-    </script>
-    {% load static %}
-    <script src="{% static 'web3auth/js/web3auth.js' %}"></script>
-    <script>
-      function startLogin() {
-        if (window.web3) {
-          checkWeb3(function (loggedIn) {
-            if (!loggedIn) {
-              alert("Please unlock your web3 provider (probably, Metamask)")
-            } else {
-              var login_url = '{% url 'web3auth:web3auth_login_api' %}';
-              web3Login(login_url, console.log, console.log, console.log, console.log, console.log, function (resp) {
-                window.location.replace(resp.redirect_url);
-              });
-            }
-          });
-
-        } else {
-          alert('web3 missing');
-        }
-      }
-    </script>
-
-
-
-
+    
 </body>
+<script>
+  async function getMessage() {
+    const response = await fetch('/api/auth/');
+    const data = await response.json();
+    return data.message;
+  }
+  
+  async function authenticate() {
+    const message = await getMessage();
+    const signature = await signMessage(message);
+    const response = await fetch('/api/auth/', {
+      method: 'POST',
+      body: JSON.stringify({
+        data: message,
+        signature
+      })
+    });
+    const data = await response.json();
+    if (data.status === 'success') {
+      console.log('User is authenticated');
+    } else {
+      console.error('Authentication failed');
+    }
+  }
+  
+  document.getElementById('#login-button').addEventListener('click', async () => {
+    console.log(await getMessage());
+  });
+</script>
 </html>
